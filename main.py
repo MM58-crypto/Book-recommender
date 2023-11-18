@@ -67,4 +67,16 @@ with st.form('form1'):
             generate_response(prompt.format(booktype=book_type, n_pages=pages, genre=fiction_genres))
         elif book_type == "Non-fiction":
             generate_response(prompt.format(booktype=book_type, n_pages=pages, genre=non_fiction_genres))
+# Book summarizer
+# (User enters the selected book in a text field and clicks a button. Once clicked, the sys will generate text that contains the summary of the selected book)
+with st.form('form2'):
+    st.subheader('Book Summarizer')
+    book_title = st.text_input('Enter your selected book title', '')
+    summary_prompt = PromptTemplate(input_variables=["booktitle"] ,
+                           template= "_Summarize the book {booktitle} in one paragraph")
+    summarize_btn = st.form_submit_button("Summarize")
+
+    if summarize_btn:
+        generate_response(summary_prompt.format(booktitle=book_title))
+
 
