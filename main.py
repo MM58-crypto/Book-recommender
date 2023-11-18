@@ -22,8 +22,8 @@ with st.form('form1'):
     st.subheader('Book type')
     st.write('Select your preferred book type')
     
-    fiction_books =  ['sci-fi', 'fantasy', 'dystopian', 'mystery', 'horror', 'thriller', 'romance']
-    nonfiction_books = ['Autobiograhy', 'Biography', 'Academic', 'Cookbook', 'Science', 'History', 'Travel', 'True crime', 'Art & photography']
+    fiction_books =  ['Sci-Fi', 'Fantasy', 'Dystopian', 'Mystery', 'Horror', 'Thriller', 'Romance']
+    nonfiction_books = ['Autobiography', 'Biography', 'Academic', 'Cookbook', 'Science', 'History', 'Travel', 'True crime', 'Art & photography']
 
   #  if 'selected_books' not in st.session_state:
   #     st.session_state.selected_books = []
