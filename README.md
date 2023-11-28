@@ -51,6 +51,7 @@ source env/bin/activate
 5. Within the same directory, create a new file "config.py"
 
 6. Within the config.py file, paste your own OpenAI API key:
+
 (can be obtained from openai.com, API keys > + Create new secret key)
 ```
 OPENAI_API_KEY ="YOUR_API_KEY"
