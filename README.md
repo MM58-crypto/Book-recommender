@@ -46,7 +46,7 @@ python -m venv your_virtual_environment_name (eg: env)
 ```
 source env/bin/activate
 ```
-4. Install the required packages from the Prerequisities section
+4. Install the required packages from the <li><a href="#prerequisites">Prerequisites</a></li> section
 
 5. Within the same directory, create a new file "config.py"
 
