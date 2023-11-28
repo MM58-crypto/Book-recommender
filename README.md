@@ -12,9 +12,6 @@ This simple book recommender webapp is designed to provide personalized book sug
 - Streamlit  
 - Langchain 🦜️🔗
 
-## Usage
-
-https://github.com/MM58-crypto/Book-recommender/assets/62597737/4ed94ee3-aa73-41fa-8cf8-fe2ed803e076
 
 ## Prerequisites
 The following packages are required to run this app locally:
@@ -60,3 +57,7 @@ OPENAI_API_KEY ="YOUR_API_KEY"
 ```
 streamlit run main.py
 ```
+
+## Usage
+
+https://github.com/MM58-crypto/Book-recommender/assets/62597737/4ed94ee3-aa73-41fa-8cf8-fe2ed803e076
