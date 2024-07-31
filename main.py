@@ -1,18 +1,19 @@
 import streamlit as st
 import openai
-import os
+#import os
 import config
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
-from dotenv import load_dotenv, find_dotenv
+#from dotenv import load_dotenv, find_dotenv
 
 st.title('Book Recommender')
 st.divider()
 st.write('Explore new books tailored just for you! Input your favorite genres or books, and our Book Recommendation System will suggest your next great read. Enjoy')
 ## summary of webapp/ tiny description
 load_dotenv(find_dotenv())
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key == st.secrets["OPENAI_API_KEY"] 
+#os.getenv("OPENAI_API_KEY")
 def generate_response(input_text):
     llm= OpenAI(temperature=0.7, openai_api_key=config.OPENAI_API_KEY)
     st.success(llm(input_text))
