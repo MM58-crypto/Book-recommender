@@ -1,30 +1,43 @@
 import streamlit as st
-import openai
-#import os
-#import config
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts import PromptTemplate
+from openai import OpenAI
+import os
+import config
+#from langchain.llms import OpenAI
+#from langchain.chat_models import ChatOpenAI
+#from langchain.prompts import PromptTemplate
 #from dotenv import load_dotenv, find_dotenv
 
 st.title('Book Recommender')
 st.divider()
 st.write('Explore new books tailored just for you! Input your favorite genres or books, and our Book Recommendation System will suggest your next great read. Enjoy')
 ## summary of webapp/ tiny description
-load_dotenv(find_dotenv())
-openai_api_key == st.secrets["OPENAI_API_KEY"] 
-#os.getenv("OPENAI_API_KEY")
+#load_dotenv(find_dotenv())
+client = OpenAI(
+
+   api_key=config.OPENAI_API_KEY 
+    
+)
+
 def generate_response(input_text):
-    llm= OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    st.success(llm(input_text))
+    chat_completion = client.chat.completions.create(
+        messages=[
+        {
+            "role": "user",
+            "content": input_text,
+        }   
+         ], 
+        model="gpt-3.5-turbo",
+)
+    #llm= OpenAI(temperature=0.7, openai_api_key=config.OPENAI_API_KEY)
+    #st.success(llm(input_text))
 
 with st.form('form1'):
 
     st.subheader('Book type')
     st.write('Select your preferred book type')
     
-    fiction_books =  ['Sci-Fi', 'Fantasy', 'Dystopian', 'Mystery', 'Horror', 'Thriller', 'Romance']
-    nonfiction_books = ['Autobiography', 'Biography', 'Academic', 'Cookbook', 'Science', 'History', 'Travel', 'True crime', 'Art & photography']
+    fiction_books =  ['sci-fi', 'fantasy', 'dystopian', 'mystery', 'horror', 'thriller', 'romance']
+    nonfiction_books = ['Autobiograhy', 'Biography', 'Academic', 'Cookbook', 'Science', 'History', 'Travel', 'True crime', 'Art & photography']
 
   #  if 'selected_books' not in st.session_state:
   #     st.session_state.selected_books = []
@@ -60,24 +73,27 @@ with st.form('form1'):
             'How many pages do you want in your recommended book(s)?',
             ('More than 200 pages', 'Less than 200 pages', 'Between 150 pages and 200 pages'))
    
-    prompt = PromptTemplate(input_variables=["booktype","n_pages", "genre"] ,
-                           template="Generate a list of ten {booktype} {genre} books with each book being {n_pages} ")
+    fiction_prompt = f"Generate a list of ten {book_type} {fiction_genres} books with each book being {pages}"
+    
+    non_fiction_prompt = f"Generate a list of ten {book_type} {non_fiction_genres} books with each book being {pages}"
+    #prompt = PromptTemplate(input_variables=["booktype","n_pages", "genre"] ,
+    #                       template="Generate a list of ten {booktype} {genre} books with each book being {n_pages} ")
     submitted = st.form_submit_button('Generate')
     if submitted:
         if book_type == "Fiction":
-            generate_response(prompt.format(booktype=book_type, n_pages=pages, genre=fiction_genres))
+            generate_response(fiction_prompt)
         elif book_type == "Non-fiction":
-            generate_response(prompt.format(booktype=book_type, n_pages=pages, genre=non_fiction_genres))
+            generate_response(non_fiction_prompt)
 # Book summarizer
 # (User enters the selected book in a text field and clicks a button. Once clicked, the sys will generate text that contains the summary of the selected book)
 with st.form('form2'):
     st.subheader('Book Summarizer')
     book_title = st.text_input('Enter your selected book title', '')
-    summary_prompt = PromptTemplate(input_variables=["booktitle"] ,
-                           template= "_Summarize the book {booktitle} in one paragraph")
+    summary_prompt = f"Summarize the book {book_title} in one paragraph"
+    #summary_prompt = PromptTemplate(input_variables=["booktitle"] ,
+    #                       template= "_Summarize the book {booktitle} in one paragraph")
     summarize_btn = st.form_submit_button("Summarize")
-
     if summarize_btn:
-        generate_response(summary_prompt.format(booktitle=book_title))
+        generate_response(summary_prompt)
 
 
