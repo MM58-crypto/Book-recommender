@@ -1,7 +1,7 @@
 import streamlit as st
 import google.generativeai as genai
 import os
-import config
+#import config
 
 st.title('Book Recommender')
 st.divider()
@@ -9,7 +9,7 @@ st.write('Explore new books tailored just for you! Input your favorite genres or
 ## summary of webapp/ tiny description
 
 
-gemini_key = config.GEMINI_API_KEY
+gemini_key = st.secrets["gemini_api_key"]
 genai.configure(api_key=gemini_key)
 model = genai.GenerativeModel("gemini-1.5-pro")
 
