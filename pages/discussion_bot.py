@@ -1,13 +1,13 @@
 import streamlit as st
 import google.generativeai as genai
 import os
-import config
+#import config
 import time
 
 st.title("Book Discussion bot!")
 st.caption("A chatbot for discussing books of your choice powered by Gemini!")
 
-gemini_key = config.GEMINI_API_KEY
+gemini_key = st.secrets["gemini_api_key"]
 genai.configure(api_key=gemini_key)
 
 
