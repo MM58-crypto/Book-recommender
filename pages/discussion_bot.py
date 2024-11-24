@@ -39,7 +39,7 @@ for message in st.session_state.messages:
 
 # user input
 # find a way to hide the prompt template from chat screen
-if prompt :=  st.chat_input("Lets chat!") :
+if prompt :=  st.chat_input("Lets chat!" + prompt_template) :
     # display user message in chat msg box
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -49,7 +49,7 @@ if prompt :=  st.chat_input("Lets chat!") :
     # send msg to gemini assistant
 
     response = st.session_state.chat.send_message(
-        prompt + prompt_template,
+        prompt,
         stream=True,
     )
 
