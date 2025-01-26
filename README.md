@@ -1,6 +1,6 @@
 # Book Recommender
 
-This simple book recommender webapp is designed to provide personalized book suggestions based on user preferences. Users can input their favorite genres, and the system generates curated recommendations to explore new reading choices.
+This is a book recommender web application is designed to provide personalized book suggestions based on user preferences. Users can input their favorite genres, and the system generates curated recommendations to explore new reading choices.
 
 ## Features
 - Genre-Based Suggestions: Users can input preferred genres for book recommendations.
