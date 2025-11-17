@@ -8,7 +8,6 @@ This is a book recommender web application is designed to provide personalized b
 - User-Friendly Interface: easy to use and intuitive design.
 - Book summarizer: Users can input the book title of one of the recommended books and a summary of the selected book  will be displayed.
 
-## Usage
 
 
 
