@@ -45,11 +45,7 @@ if prompt :=  st.chat_input("Lets chat!" ) :
         st.markdown(prompt)
     # add user msgs to chat history
     st.session_state.messages.append({"role": "user", "content":  prompt})
-
     # send msg to gemini assistant
-
-    
-
     with st.chat_message("assistant"):
         response = st.session_state.chat.send_message(
             prompt,
@@ -62,9 +58,6 @@ if prompt :=  st.chat_input("Lets chat!" ) :
         
         full_response = st.write_stream(stream_generator())
         
-
-        
-
     st.session_state.messages.append(
         {"role": "assistant", "content": full_response}
     )
