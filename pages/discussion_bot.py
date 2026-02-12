@@ -26,7 +26,7 @@ if "messages" not in st.session_state:
 if "chat" not in st.session_state:
     model = genai.GenerativeModel(
         model_name="gemini-1.5-pro", # Adjusted to current stable version
-        system_instruction=SYSTEM_PROMPT
+        system_instruction=prompt_template
     )
     # Start chat with internal history tracking
     st.session_state.chat = model.start_chat(history=[])
