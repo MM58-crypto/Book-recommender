@@ -46,16 +46,16 @@ if prompt :=  st.chat_input("Lets chat!" ) :
     # add user msgs to chat history
     st.session_state.messages.append({"role": "user", "content":  prompt})
     # send msg to gemini assistant
+    
     with st.chat_message("assistant"):
         response = st.session_state.chat.send_message(
             prompt,
             stream=True,
         )
         
-        def stream_generator():
+        def stream_gen():
             for chunk in response:
                 yield chunk.text
-        
         full_response = st.write_stream(stream_generator())
         
     st.session_state.messages.append(
