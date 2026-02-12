@@ -23,7 +23,7 @@ You may respond to the user in arabic if the query is in the arabic language
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-st.session_state.model =  genai.GenerativeModel("gemini-2.0-flash")
+st.session_state.model =  genai.GenerativeModel("gemini-2.5-pro")
 st.session_state.chat = st.session_state.model.start_chat(
     history = [ {"role": m["role"], "parts": m["content"]}
                 for m in st.session_state.messages
