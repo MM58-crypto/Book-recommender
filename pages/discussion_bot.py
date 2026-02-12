@@ -56,7 +56,7 @@ if prompt :=  st.chat_input("Lets chat!" ) :
         def stream_gen():
             for chunk in response:
                 yield chunk.text
-        full_response = st.write_stream(stream_generator())
+        full_response = st.write_stream(stream_gen())
         
     st.session_state.messages.append(
         {"role": "assistant", "content": full_response}
