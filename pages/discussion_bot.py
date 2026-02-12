@@ -63,7 +63,7 @@ if prompt :=  st.chat_input("Lets chat!" ) :
         full_response = st.write_stream(stream_generator())
         
 
-        message_placeholder.write(full_response)
+        
 
     st.session_state.messages.append(
         {"role": "assistant", "content": full_response}
