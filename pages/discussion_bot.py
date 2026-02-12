@@ -23,13 +23,13 @@ You may respond to the user in arabic if the query is in the arabic language
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-st.session_state.model =  genai.GenerativeModel("gemini-2.5-pro")
-st.session_state.chat = st.session_state.model.start_chat(
-    history = [ {"role": m["role"], "parts": m["content"]}
-                for m in st.session_state.messages
-               ]
-
-)
+if "chat" not in st.session_state:
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-pro", # Adjusted to current stable version
+        system_instruction=SYSTEM_PROMPT
+    )
+    # Start chat with internal history tracking
+    st.session_state.chat = model.start_chat(history=[])
 # Display chat messages from history
 
 for message in st.session_state.messages:
@@ -39,35 +39,34 @@ for message in st.session_state.messages:
 
 # user input
 # find a way to hide the prompt template from chat screen
-if prompt :=  st.chat_input("Lets chat!" + prompt_template) :
+if prompt :=  st.chat_input("Lets chat!" ) :
     # display user message in chat msg box
     with st.chat_message("user"):
         st.markdown(prompt)
     # add user msgs to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt_template + '\n' + prompt})
+    st.session_state.messages.append({"role": "user", "content":  prompt})
 
     # send msg to gemini assistant
 
-    response = st.session_state.chat.send_message(
-        prompt,
-        stream=True,
-    )
+    
 
     with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ''
-
-        for chunk in response:
-            for ch in chunk.text.split(' '):
-                full_response +=ch + ' '
-                time.sleep(0.05)
-                message_placeholder.write(full_response + '▌')
-        # Write full message with placeholder
+        response = st.session_state.chat.send_message(
+            prompt,
+            stream=True,
+        )
+        
+        def stream_generator():
+            for chunk in response:
+                yield chunk.text
+        
+        full_response = st.write_stream(stream_generator())
+        
 
         message_placeholder.write(full_response)
 
     st.session_state.messages.append(
-        {"role": "assistant", "content": st.session_state.chat.history[-1].parts[0].text}
+        {"role": "assistant", "content": full_response}
     )
 
 
