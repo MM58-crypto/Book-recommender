@@ -11,7 +11,7 @@ st.write('Explore new books tailored just for you! Input your favorite genres or
 
 gemini_key = st.secrets["gemini_api_key"]
 genai.configure(api_key=gemini_key)
-model = genai.GenerativeModel("gemini-1.5-pro")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 tab1, tab2 = st.tabs(['Fiction Books Genre', ' Non-fiction Books Genre'])
 
